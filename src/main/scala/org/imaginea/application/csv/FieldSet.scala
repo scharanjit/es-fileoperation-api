@@ -8,7 +8,8 @@ import scala.util.Try
 import java.lang.Boolean
 
 
-class FieldSet(labels: List[String], values: Array[String]) {
+
+class FieldSet(labels: List[String], values: Array[String]){
   val fields = labels.zip(values).toMap
 
   def readString(field: String): Option[String] = fields.get(field)

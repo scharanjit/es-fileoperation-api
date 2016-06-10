@@ -7,10 +7,8 @@ package org.imaginea.application.main
 
 import com.typesafe.scalalogging.LazyLogging
 import org.imaginea.application.csv.CSVProcessor
-import scala.collection.mutable.ListBuffer
-
 import java.io.File
-import scala.util.Try
+
 
 object ESApplication extends LazyLogging {
 
@@ -18,7 +16,7 @@ object ESApplication extends LazyLogging {
   def main(args: Array[String]) {
     logger.info("in main")
     //    val folderPath= args(0)
-    //    val folderPath=""
+    //    val folderPath="" //testing null
     val folderPath = "/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/"
 
     logger.info(folderPath.toString)

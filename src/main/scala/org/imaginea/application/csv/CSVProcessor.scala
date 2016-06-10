@@ -10,11 +10,8 @@ import com.typesafe.scalalogging.LazyLogging
 import net.liftweb.json._
 import net.liftweb.json.Serialization.write
 import org.apache.http.impl.client.HttpClientBuilder
-import org.apache.http.impl.client.CloseableHttpClient
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
-import net.liftweb.json.JsonDSL._
-
 
 class CSVProcessor extends LazyLogging {
 
