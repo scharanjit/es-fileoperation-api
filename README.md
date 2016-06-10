@@ -53,12 +53,13 @@ Readme is under developement
 **Creating the user index.**
 
 
-# Since we are dealing with one single node in my example the replicas are set to 0
-# if you had more than 1 node in the cluster the default for number of replicas is 1 
-# and will actually put an exact replica of your data on the second node. The shards 
-# by default is 5 and this basically how elasticsearch can quickly find your data by 
-# sharding it out to multiple nodes. 
+Since we are dealing with one single node in my example the replicas are set to 0
+if you had more than 1 node in the cluster the default for number of replicas is 1 
+and will actually put an exact replica of your data on the second node. The shards 
+by default is 5 and this basically how elasticsearch can quickly find your data by 
+sharding it out to multiple nodes. 
 
+<
 curl -XPUT http://localhost:9200/filo1?pretty=true -d '
 {
     "settings" : {
@@ -69,7 +70,7 @@ curl -XPUT http://localhost:9200/filo1?pretty=true -d '
     }
 }
 '
-
+>
 
 **Create the mapping for the user index and type of profile.**
 
