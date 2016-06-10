@@ -1,0 +1,3 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/logback.xml,/home/charanjits/Documents/ideaProjects/es-fileoperations-api/target/scala-2.11/classes/logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/Sample_Events.csv,/home/charanjits/Documents/ideaProjects/es-fileoperations-api/target/scala-2.11/classes/Sample_Events.csv)[0m
