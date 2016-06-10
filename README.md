@@ -85,7 +85,7 @@ curl -XPUT http://localhost:9200/filo1/_mapping/profile?pretty=true -d '
 {
     "profile" : {
         "properties" : {
-“$outer” :{}
+“$outer” :{"type" : "string" , "store" :false},
 “Empcode”: { "type" : "string", "store" : true },
 “InDate” : { "type" : "string", "store" : true },
 “OutDate” : { "type" : "string", "store" : true },

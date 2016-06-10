@@ -39,11 +39,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ESApplication.scala" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ESApplication.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESApplication.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
+            <state relative-caret-position="93">
+              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
               <folding>
                 <element signature="e#87#131#0" expanded="true" />
               </folding>
@@ -85,12 +85,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="228">
-                <caret line="116" column="1" selection-start-line="116" selection-start-column="1" selection-end-line="116" selection-end-column="1" />
+              <first_editor relative-caret-position="251">
+                <caret line="96" column="1" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -185,8 +185,8 @@
         <option value="$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESMain.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/imaginea/application/csv/FieldSet.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/org/imaginea/application/csv/CSVProcessor.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESApplication.scala" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESApplication.scala" />
       </list>
     </option>
   </component>
@@ -1473,21 +1473,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESApplication.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding>
-            <element signature="e#87#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="228">
-            <caret line="116" column="1" selection-start-line="116" selection-start-column="1" selection-end-line="116" selection-end-column="1" />
+          <first_editor relative-caret-position="251">
+            <caret line="96" column="1" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
             <folding />
           </first_editor>
           <second_editor />
@@ -1495,6 +1485,16 @@
       </provider>
       <provider editor-type-id="MarkdownFxPreviewEditor">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scala/org/imaginea/application/main/ESApplication.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding>
+            <element signature="e#87#131#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
