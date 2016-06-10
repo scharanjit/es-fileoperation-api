@@ -15,9 +15,9 @@ object ESApplication extends LazyLogging {
 
   def main(args: Array[String]) {
     logger.info("in main")
-    //    val folderPath= args(0)
+        val folderPath= args(0)
     //    val folderPath="" //testing null
-    val folderPath = "/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/"
+
 
     logger.info(folderPath.toString)
 
