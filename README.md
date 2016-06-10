@@ -59,18 +59,22 @@ and will actually put an exact replica of your data on the second node. The shar
 by default is 5 and this basically how elasticsearch can quickly find your data by 
 sharding it out to multiple nodes. 
 
-<
-curl -XPUT http://localhost:9200/filo1?pretty=true -d '
-{
-    "settings" : {
-        "index" : {
-            "number_of_shards" : 5,
-            "number_of_replicas" : 0
-        }
-    }
-}
-'
->
+|  curl -XPUT http://localhost:9200/filo1?pretty=true -d '
+   {
+       "settings" : {
+           "index" : {
+               "number_of_shards" : 5,
+               "number_of_replicas" : 0
+           }
+       }
+   }
+   '
+    |
+|---|
+|   |
+
+
+
 
 **Create the mapping for the user index and type of profile.**
 
