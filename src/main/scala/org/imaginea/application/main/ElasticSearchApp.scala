@@ -30,7 +30,7 @@ object ElasticSearchApp extends LazyLogging {
     }
 
 
-
+logger.info("===Upload Done===")
   }
 
 

@@ -4,7 +4,7 @@ package org.imaginea.application.csv
   * Created by charanjits on 9/6/16.
   */
 
-import java.io.File
+import java.io.{File, InputStream}
 
 import com.typesafe.scalalogging.LazyLogging
 import net.liftweb.json._
@@ -13,82 +13,105 @@ import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
 
+
 class CSVProcessor extends LazyLogging {
 
-  case class SampleEvents(EventNo: String, AppType: String, EventDate: String, LogDate: String, DeviceObjID: String, DevChildObjID: String, ItemNo: String, SubItemNo: String, EventID: String, PriorityID: String, IsAlarm: String, SiteID: String, EventDescription: String, SiteDescription: String, DeviceDescription: String, DevChildDescription: String, ItemDescription: String, PriorityDescription: String, AckOperator: String, AckComment: String, AckDate: String, ProcOperator: String, ProcComment: String, ProcDate: String, CategoryID: String, CategoryDescription: String, ClassiId: String, ClassiDesc: String, iEventDate: String, iLogDate: String, empCode: String, DeviceTime: String, revision: String)
+  case class SampleEvents(eventNo: String, appType: String, eventDate: String, logDate: String, deviceObjID: String, devChildObjID: String, itemNo: String, subItemNo: String, eventID: String, priorityID: String, isAlarm: String, siteID: String, eventDescription: String, siteDescription: String, deviceDescription: String, devChildDescription: String, itemDescription: String, priorityDescription: String, ackOperator: String, ackComment: String, ackDate: String, procOperator: String, procComment: String, procDate: String, categoryID: String, categoryDescription: String, classiID: String, classiDesc: String, iEventDate: String, iLogDate: String, empCode: String, deviceTime: String, revision: String)
 
-  case class FileOutput(Empcode: String, InDate: String, OutDate: String, TotalHours: String, sitedescription: String, ItemDescription: String)
+  case class FileOutput(empCode: String, inDate: String, outDate: String, totalHours: String, siteDescription: String, itemDescription: String)
 
-  val EMPCODE = "Empcode"
-  val INDATE = "InDate"
-  val OUTDATE = "OutDate"
-  val TOTALHOURS = "TotalHours"
-  val SITEDESCRIPTION = "sitedescription"
-  val ITEMDESCRIPTION = "ItemDescription"
+  val EMPCODE = "empCode"
+  val INDATE = "inDate"
+  val OUTDATE = "outDate"
+  val TOTALHOURS = "totalHours"
+  val SITEDESCRIPTION = "siteDescription"
+  val ITEMDESCRIPTION = "itemDescription"
 
 
-  val EVENTNO = "EventNo"
-  val APPTYPE = "AppType"
-  val EVENTDATE = "EventDate"
-  val LOGDATE = "LogDate"
-  val DEVICEOBJID = "DeviceObjID"
-  val DEVCHILDOBJID = "DevChildObjID"
-  val ITEMNO = "ItemNo"
-  val SUBITEMNO = "SubItemNo"
-  val EVENTID = "EventID"
-  val PRIORITYID = "PriorityID"
-  val ISALARM = "IsAlarm"
-  val SITEID = "SiteID"
-  val EVENTDESCRIPTION = "EventDescription"
-  // val SITEDESCRIPTION="SiteDescription"
-  val DEVICEDESCRIPTION = "DeviceDescription"
-  val DEVCHILDDESCRIPTION = "DevChildDescription"
-  //val ITEMDESCRIPTION="ItemDescription"
-  val PRIORITYDESCRIPTION = "PriorityDescription"
-  val ACKOPERATOR = "AckOperator"
-  val ACKCOMMENT = "AckComment"
-  val ACKDATE = "AckDate"
-  val PROCOPERATOR = "ProcOperator"
-  val PROCCOMMENT = "ProcComment"
-  val PROCDATE = "ProcDate"
-  val CATEGORYID = "CategoryID"
-  val CATEGORYDESCRIPTION = "CategoryDescription"
-  val CLASSIID = "ClassiId"
-  val CLASSIDESC = "ClassiDesc"
+  val EVENTNO = "eventNo"
+  val APPTYPE = "appType"
+  val EVENTDATE = "eventDate"
+  val LOGDATE = "logDate"
+  val DEVICEOBJID = "deviceObjID"
+  val DEVCHILDOBJID = "devChildObjID"
+  val ITEMNO = "itemNo"
+  val SUBITEMNO = "subItemNo"
+  val EVENTID = "eventID"
+  val PRIORITYID = "priorityID"
+  val ISALARM = "isAlarm"
+  val SITEID = "siteID"
+  val EVENTDESCRIPTION = "eventDescription"
+  val DEVICEDESCRIPTION = "deviceDescription"
+  val DEVCHILDDESCRIPTION = "devChildDescription"
+  val PRIORITYDESCRIPTION = "priorityDescription"
+  val ACKOPERATOR = "ackOperator"
+  val ACKCOMMENT = "ackComment"
+  val ACKDATE = "ackDate"
+  val PROCOPERATOR = "procOperator"
+  val PROCCOMMENT = "procComment"
+  val PROCDATE = "procDate"
+  val CATEGORYID = "categoryID"
+  val CATEGORYDESCRIPTION = "categoryDescription"
+  val CLASSIID = "classiID"
+  val CLASSIDESC = "classiDesc"
   val IEVENTDATE = "iEventDate"
   val ILOGDATE = "iLogDate"
-  //val EMPCODE="empCode"
-  val DEVICETIME = "DeviceTime"
+  val DEVICETIME = "deviceTime"
   val REVISION = "revision"
 
-  def JSONConvertor(csvReader: CSVReader[Any],url:String) = {
+  def JSONConvertor(csvReader: CSVReader[Any], url: String) = {
     logger.info("inside JSON Convertor")
     while (csvReader.hasNext) {
       implicit val formats = DefaultFormats
       val jsonString = write(csvReader.next)
-      postJSONToES(jsonString,url)  //http://localhost:9200/filo1/profile/
-      //println(jsonString)
+      postJSONToES(jsonString, url)
+
     }
   }
 
 
-  def postJSONToES(jsonString: String,url:String) = {
-    val httpClient = HttpClientBuilder.create().build();
-    val request = new HttpPost(url);
-    val params = new StringEntity(jsonString);
-    request.addHeader("content-type", "application/json");
-    request.setEntity(params);
-    httpClient.execute(request);
+  def postJSONToES(jsonString: String, url: String) = {
+    val httpClient = HttpClientBuilder.create().build()
+    val request = new HttpPost(url)
+    val params = new StringEntity(jsonString)
+    request.addHeader("content-type", "application/json")
+    request.setEntity(params)
+    httpClient.execute(request)
 
   }
 
+  def isEmpty(x: String) = x != null && x.nonEmpty
+
+  def assignURL(fileName: String): String = {
+    logger.info("Inside assignURL method")
+
+    val stream: InputStream = getClass.getResourceAsStream("/config.properities")
+    val lines = scala.io.Source.fromInputStream(stream).getLines.flatMap { line =>
+      line.split("\\,+")
+    }
+
+    while (lines.hasNext) {
+      val sequence = lines.next()
+      if (sequence.contains(fileName)) {
+        val url: String = sequence.concat("").substring(4)
+        logger.info("Extracted url is " + url)
+        url match {
+          case url if isEmpty(url) => return url
+          case _ => logger.info("No valid url found")
+        }
+
+      }
+    }
+    ""
+  }
 
   def CSVExtractor(file: File) = {
     logger.info("Inside CSV Extractor")
     val path = file.getAbsolutePath
-    val url:String=""
 
-    if (file.getName() startsWith ("FIL")) {
+    val fileName = file.getName
+
+    if (fileName startsWith "FIL") {
 
       val lineMapper = new LineMapper[FileOutput] {
         override def mapLine(fieldSet: FieldSet): FileOutput = {
@@ -104,9 +127,9 @@ class CSVProcessor extends LazyLogging {
 
       val csvReader = new CSVReader[FileOutput](path, ",", List(EMPCODE, INDATE, OUTDATE, TOTALHOURS, SITEDESCRIPTION, ITEMDESCRIPTION), true, lineMapper)
 
-      JSONConvertor(csvReader.asInstanceOf[CSVReader[Any]],url)
+      JSONConvertor(csvReader.asInstanceOf[CSVReader[Any]], assignURL("FIL"))
 
-    } else {
+    } else if (fileName startsWith "Sam") {
 
       val lineMapper = new LineMapper[SampleEvents] {
         override def mapLine(fieldSet: FieldSet): SampleEvents = {
@@ -149,7 +172,7 @@ class CSVProcessor extends LazyLogging {
 
       val csvReader = new CSVReader[SampleEvents](path, ",", List(EVENTNO, APPTYPE, EVENTDATE, LOGDATE, DEVICEOBJID, DEVCHILDOBJID, ITEMNO, SUBITEMNO, EVENTID, PRIORITYID, ISALARM, SITEID, EVENTDESCRIPTION, SITEDESCRIPTION, DEVICEDESCRIPTION, DEVCHILDDESCRIPTION, ITEMDESCRIPTION, PRIORITYDESCRIPTION, ACKOPERATOR, ACKCOMMENT, ACKDATE, PROCOPERATOR, PROCCOMMENT, PROCDATE, CATEGORYID, CATEGORYDESCRIPTION, CLASSIID, CLASSIDESC, IEVENTDATE, ILOGDATE, EMPCODE, DEVICETIME, REVISION), true, lineMapper)
 
-      JSONConvertor(csvReader.asInstanceOf[CSVReader[Any]],url)
+      JSONConvertor(csvReader.asInstanceOf[CSVReader[Any]], assignURL("SAM"))
     }
   }
 
