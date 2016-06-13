@@ -76,8 +76,8 @@ class CSVProcessor extends LazyLogging {
     val params = new StringEntity(jsonString)
     request.addHeader("content-type", "application/json")
     request.setEntity(params)
-    httpClient.execute(request)
-
+    val response = httpClient.execute(request)
+    logger.debug(" "+response.getStatusLine)
   }
 
   def isEmpty(x: String) = x != null && x.nonEmpty
