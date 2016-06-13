@@ -10,13 +10,15 @@ import org.imaginea.application.csv.CSVProcessor
 import java.io.File
 
 
-object ESApplication extends LazyLogging {
+
+object ElasticSearchApp extends LazyLogging {
 
 
   def main(args: Array[String]) {
     logger.info("in main")
-        val folderPath= args(0)
-    //    val folderPath="" //testing null
+    val folderPath = "/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/"
+        //val folderPath= args(0)
+//      val folderPath="" //testing null
 
 
     logger.info(folderPath.toString)
@@ -26,6 +28,8 @@ object ESApplication extends LazyLogging {
       case (folderPath) if (!folderPath.isEmpty) => fileFinder(folderPath)
       case _ => logger.info("Enter a Valid Folder Path for CSV files")
     }
+
+
 
   }
 
