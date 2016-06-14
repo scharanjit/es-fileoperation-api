@@ -28,15 +28,15 @@ object ElasticSearchApp extends LazyLogging {
 
 
   def fileFinder(path: String): Int = {
-    var count = 0
+    var csvCounter = 0
     logger.info("Inside fileFinder")
     for (file <- new File(path).listFiles.toIterator if file.getName endsWith ".csv") {
       logger.info(file.toString)
       val obj = new CSVProcessor()
       obj.CSVExtractor(file)
-      count = count + 1
+      csvCounter += 1
     }
-    count
+    csvCounter
   }
 
 
