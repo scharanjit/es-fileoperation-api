@@ -30,7 +30,7 @@ class ElasticSearchTest extends JUnitSuite with ShouldMatchersForJUnit with Lazy
 
   @Test def testCSVExtractor = {
     logger.info("Inside testCSVExtractor")
-    val folderPath = "/home/charanjits/Documents/ideaProjects/es-fileoperations-api/src/main/resources/"
+    val folderPath = "/es-fileoperations-api/src/main/resources/"
 
     for (file <- new File(folderPath).listFiles().toIterator if file.getName endsWith ".csv") {
       logger.info(file.toString)

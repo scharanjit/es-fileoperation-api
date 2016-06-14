@@ -12,6 +12,7 @@ import net.liftweb.json.Serialization.write
 import org.apache.http.impl.client.HttpClientBuilder
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
+import org.apache.http.conn.HttpHostConnectException
 
 
 class CSVProcessor extends LazyLogging {
@@ -71,13 +72,18 @@ class CSVProcessor extends LazyLogging {
 
 
   def postJSONToES(jsonString: String, url: String) = {
+    logger.info("Inside postJSONToES")
     val httpClient = HttpClientBuilder.create().build()
     val request = new HttpPost(url)
     val params = new StringEntity(jsonString)
     request.addHeader("content-type", "application/json")
     request.setEntity(params)
-    val response = httpClient.execute(request)
-    logger.debug(" " + response.getStatusLine)
+    try {
+      val response = httpClient.execute(request)
+      logger.debug("Successfully Posted " + response.getStatusLine.getStatusCode)
+    } catch {
+      case e: HttpHostConnectException => logger.error(" Connection failed :" + e)
+    }
   }
 
   def isEmpty(x: String) = x != null && x.nonEmpty
@@ -87,8 +93,9 @@ class CSVProcessor extends LazyLogging {
 
     val stream: InputStream = getClass.getResourceAsStream("/config.properities")
 
-    val lines = scala.io.Source.fromInputStream(stream).getLines.flatMap { line =>
-      line.split("\\,+")
+    val lines = scala.io.Source.fromInputStream(stream).getLines.flatMap {
+      line =>
+        line.split("\\,+")
     }
 
     while (lines.hasNext) {
