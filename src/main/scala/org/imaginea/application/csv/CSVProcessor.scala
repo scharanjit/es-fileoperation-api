@@ -77,7 +77,7 @@ class CSVProcessor extends LazyLogging {
     request.addHeader("content-type", "application/json")
     request.setEntity(params)
     val response = httpClient.execute(request)
-    logger.debug(" "+response.getStatusLine)
+    logger.debug(" " + response.getStatusLine)
   }
 
   def isEmpty(x: String) = x != null && x.nonEmpty
@@ -86,6 +86,7 @@ class CSVProcessor extends LazyLogging {
     logger.info("Inside assignURL method")
 
     val stream: InputStream = getClass.getResourceAsStream("/config.properities")
+
     val lines = scala.io.Source.fromInputStream(stream).getLines.flatMap { line =>
       line.split("\\,+")
     }
@@ -115,13 +116,13 @@ class CSVProcessor extends LazyLogging {
 
       val lineMapper = new LineMapper[FileOutput] {
         override def mapLine(fieldSet: FieldSet): FileOutput = {
-          val Empcode = fieldSet.readString(EMPCODE).getOrElse("")
-          val InDate = fieldSet.readString(INDATE).getOrElse("")
-          val OutDate = fieldSet.readString(OUTDATE).getOrElse("")
-          val TotalHours = fieldSet.readString(TOTALHOURS).getOrElse("")
-          val sitedescription = fieldSet.readString(SITEDESCRIPTION).getOrElse("")
-          val ItemDescription = fieldSet.readString(ITEMDESCRIPTION).getOrElse("")
-          FileOutput(Empcode, InDate, OutDate, TotalHours, sitedescription, ItemDescription)
+          val empCode = fieldSet.readString(EMPCODE).getOrElse("")
+          val inDate = fieldSet.readString(INDATE).getOrElse("")
+          val outDate = fieldSet.readString(OUTDATE).getOrElse("")
+          val totalHours = fieldSet.readString(TOTALHOURS).getOrElse("")
+          val siteDescription = fieldSet.readString(SITEDESCRIPTION).getOrElse("")
+          val itemDescription = fieldSet.readString(ITEMDESCRIPTION).getOrElse("")
+          FileOutput(empCode, inDate, outDate, totalHours, siteDescription, itemDescription)
         }
       }
 
@@ -133,40 +134,40 @@ class CSVProcessor extends LazyLogging {
 
       val lineMapper = new LineMapper[SampleEvents] {
         override def mapLine(fieldSet: FieldSet): SampleEvents = {
-          val EventNo = fieldSet.readString(EVENTNO).getOrElse("")
-          val AppType = fieldSet.readString(APPTYPE).getOrElse("")
-          val EventDate = fieldSet.readString(EVENTDATE).getOrElse("")
-          val LogDate = fieldSet.readString(LOGDATE).getOrElse("")
-          val DeviceObjID = fieldSet.readString(DEVICEOBJID).getOrElse("")
-          val DevChildObjID = fieldSet.readString(DEVCHILDOBJID).getOrElse("")
-          val ItemNo = fieldSet.readString(ITEMNO).getOrElse("")
-          val SubItemNo = fieldSet.readString(SUBITEMNO).getOrElse("")
-          val EventID = fieldSet.readString(EVENTID).getOrElse("")
-          val PriorityID = fieldSet.readString(PRIORITYID).getOrElse("")
-          val IsAlarm = fieldSet.readString(ISALARM).getOrElse("")
-          val SiteID = fieldSet.readString(SITEID).getOrElse("")
-          val EventDescription = fieldSet.readString(EVENTDESCRIPTION).getOrElse("")
-          val SiteDescription = fieldSet.readString(SITEDESCRIPTION).getOrElse("")
-          val DeviceDescription = fieldSet.readString(DEVICEDESCRIPTION).getOrElse("")
-          val DevChildDescription = fieldSet.readString(DEVCHILDDESCRIPTION).getOrElse("")
-          val ItemDescription = fieldSet.readString(ITEMDESCRIPTION).getOrElse("")
-          val PriorityDescription = fieldSet.readString(PRIORITYDESCRIPTION).getOrElse("")
-          val AckOperator = fieldSet.readString(ACKOPERATOR).getOrElse("")
-          val AckComment = fieldSet.readString(ACKCOMMENT).getOrElse("")
-          val AckDate = fieldSet.readString(ACKDATE).getOrElse("")
-          val ProcOperator = fieldSet.readString(PROCOPERATOR).getOrElse("")
-          val ProcComment = fieldSet.readString(PROCCOMMENT).getOrElse("")
-          val ProcDate = fieldSet.readString(PROCDATE).getOrElse("")
-          val CategoryID = fieldSet.readString(CATEGORYID).getOrElse("")
-          val CategoryDescription = fieldSet.readString(CATEGORYDESCRIPTION).getOrElse("")
-          val ClassiId = fieldSet.readString(CLASSIID).getOrElse("")
-          val ClassiDesc = fieldSet.readString(CLASSIDESC).getOrElse("")
+          val eventNo = fieldSet.readString(EVENTNO).getOrElse("")
+          val appType = fieldSet.readString(APPTYPE).getOrElse("")
+          val eventDate = fieldSet.readString(EVENTDATE).getOrElse("")
+          val logDate = fieldSet.readString(LOGDATE).getOrElse("")
+          val deviceObjID = fieldSet.readString(DEVICEOBJID).getOrElse("")
+          val devChildObjID = fieldSet.readString(DEVCHILDOBJID).getOrElse("")
+          val itemNo = fieldSet.readString(ITEMNO).getOrElse("")
+          val subItemNo = fieldSet.readString(SUBITEMNO).getOrElse("")
+          val eventID = fieldSet.readString(EVENTID).getOrElse("")
+          val priorityID = fieldSet.readString(PRIORITYID).getOrElse("")
+          val isAlarm = fieldSet.readString(ISALARM).getOrElse("")
+          val siteID = fieldSet.readString(SITEID).getOrElse("")
+          val eventDescription = fieldSet.readString(EVENTDESCRIPTION).getOrElse("")
+          val siteDescription = fieldSet.readString(SITEDESCRIPTION).getOrElse("")
+          val deviceDescription = fieldSet.readString(DEVICEDESCRIPTION).getOrElse("")
+          val devChildDescription = fieldSet.readString(DEVCHILDDESCRIPTION).getOrElse("")
+          val itemDescription = fieldSet.readString(ITEMDESCRIPTION).getOrElse("")
+          val priorityDescription = fieldSet.readString(PRIORITYDESCRIPTION).getOrElse("")
+          val ackOperator = fieldSet.readString(ACKOPERATOR).getOrElse("")
+          val ackComment = fieldSet.readString(ACKCOMMENT).getOrElse("")
+          val ackDate = fieldSet.readString(ACKDATE).getOrElse("")
+          val procOperator = fieldSet.readString(PROCOPERATOR).getOrElse("")
+          val procComment = fieldSet.readString(PROCCOMMENT).getOrElse("")
+          val procDate = fieldSet.readString(PROCDATE).getOrElse("")
+          val categoryID = fieldSet.readString(CATEGORYID).getOrElse("")
+          val categoryDescription = fieldSet.readString(CATEGORYDESCRIPTION).getOrElse("")
+          val classiID = fieldSet.readString(CLASSIID).getOrElse("")
+          val classiDesc = fieldSet.readString(CLASSIDESC).getOrElse("")
           val iEventDate = fieldSet.readString(IEVENTDATE).getOrElse("")
           val iLogDate = fieldSet.readString(ILOGDATE).getOrElse("")
           val empCode = fieldSet.readString(EMPCODE).getOrElse("")
-          val DeviceTime = fieldSet.readString(DEVICETIME).getOrElse("")
+          val deviceTime = fieldSet.readString(DEVICETIME).getOrElse("")
           val revision = fieldSet.readString(REVISION).getOrElse("")
-          SampleEvents(EventNo, AppType, EventDate, LogDate, DeviceObjID, DevChildObjID, ItemNo, SubItemNo, EventID, PriorityID, IsAlarm, SiteID, EventDescription, SiteDescription, DeviceDescription, DevChildDescription, ItemDescription, PriorityDescription, AckOperator, AckComment, AckDate, ProcOperator, ProcComment, ProcDate, CategoryID, CategoryDescription, ClassiId, ClassiDesc, iEventDate, iLogDate, empCode, DeviceTime, revision)
+          SampleEvents(eventNo, appType, eventDate, logDate, deviceObjID, devChildObjID, itemNo, subItemNo, eventID, priorityID, isAlarm, siteID, eventDescription, siteDescription, deviceDescription, devChildDescription, itemDescription, priorityDescription, ackOperator, ackComment, ackDate, procOperator, procComment, procDate, categoryID, categoryDescription, classiID, classiDesc, iEventDate, iLogDate, empCode, deviceTime, revision)
         }
       }
 
